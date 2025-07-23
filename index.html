@@ -1,108 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pedido de Aumento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aumento, Chefe?</title>
   <style>
-    * {
+    body, html {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body, html {
       height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
       overflow: hidden;
     }
+
     .background {
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       z-index: -1;
     }
+
     .container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      color: white;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      box-sizing: border-box;
     }
-    .botao {
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .buttons {
       margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 16px;
+      position: relative;
+      height: 50px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
       cursor: pointer;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       transition: 0.3s;
+      position: relative;
+      z-index: 10;
     }
-    .positivo {
+
+    .yes {
       background-color: #4CAF50;
       color: white;
     }
-    .negativo {
+
+    .no {
       background-color: #f44336;
       color: white;
       position: absolute;
+      transition: left 0.2s ease, top 0.2s ease;
     }
-    .atributos {
-      margin-top: 20px;
-      font-size: 18px;
-      text-align: left;
-    }
+
     .oculto {
       display: none;
+    }
+
+    .atributos {
+      font-size: 1.5em;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .atributos div {
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
-
-  <img class="background" id="bg1" src="https://media.tenor.com/yXS3aR6YGtEAAAAC/minda.gif" alt="Fundo 1">
-  <img class="background oculto" id="bg2" src="https://media.tenor.com/3NQKqGjF_OsAAAAC/homer.gif" alt="Fundo 2">
+  <img class="background" id="bg1" src="minda.gif" alt="Gif fundo Minda" />
+  <img class="background oculto" id="bg2" src="homer.gif" alt="Gif fundo Homer" />
 
   <div class="container" id="tela1">
-    <h1>Olá, Chefe! 😎</h1>
-    <p>Será que o senhor poderia, por gentileza, me dar um aumento?</p>
-    <button class="botao positivo" onclick="responder()">CLARO, MEU MELHOR FUNCIONÁRIO.</button>
-    <button class="botao negativo" id="naoBtn" onmouseover="fugir()">não</button>
+    <h1>Olá, Chefe 😁</h1>
+    <p>O senhor poderia, por gentileza, me dar um aumento?</p>
+    <div class="buttons">
+      <button class="btn yes" onclick="mostrarAgradecimento()">CLARO, MEU MELHOR FUNCIONÁRIO.</button>
+      <button class="btn no" id="noBtn" onmouseenter="moverBotao()">não</button>
+    </div>
   </div>
 
   <div class="container oculto" id="tela2">
-    <h1>OBRIGADO, CHEFE! 🤑</h1>
-    <h3>Atributos melhorados:</h3>
+    <h1>OBRIGADO, CHEFE! 🥳</h1>
+    <p>Atributos melhorados:</p>
     <div class="atributos">
-      💸 Salário: <strong>+40%</strong><br>
-      🙏 Gratidão ao Chefe: <strong>+100%</strong><br>
-      🚀 Motivação: <strong>MAXIMIZADA</strong><br>
+      <div>💰 Salário: +40%</div>
+      <div>🙏 Gratidão ao Chefe: +100%</div>
     </div>
   </div>
 
   <script>
-    const naoBtn = document.getElementById('naoBtn');
+    function mostrarAgradecimento() {
+      document.getElementById("tela1").classList.add("oculto");
+      document.getElementById("bg1").classList.add("oculto");
 
-    function fugir() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      naoBtn.style.left = x + 'px';
-      naoBtn.style.top = y + 'px';
+      document.getElementById("tela2").classList.remove("oculto");
+      document.getElementById("bg2").classList.remove("oculto");
     }
 
-    function responder() {
-      document.getElementById('tela1').classList.add('oculto');
-      document.getElementById('bg1').classList.add('oculto');
-      document.getElementById('tela2').classList.remove('oculto');
-      document.getElementById('bg2').classList.remove('oculto');
+    function moverBotao() {
+      const noBtn = document.getElementById("noBtn");
+      const padding = 20;
+      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     }
   </script>
-
 </body>
 </html>
