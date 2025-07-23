@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aumento, Chefe?</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no {
+      background-color: #f44336;
+      color: white;
+      position: relative;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .atributos {
+      font-size: 1.5em;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .atributos div {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <img class="background" id="bg1" src="https://media.tenor.com/yXS3aR6YGtEAAAAC/minda.gif">
+  <img class="background oculto" id="bg2" src="https://c.tenor.com/6mOE9KhTCh8AAAAC/homer-simpson-excited.gif">
+
+  <div class="container" id="tela1">
+    <h1>Olá, Chefe 😁</h1>
+    <p>O senhor poderia, por gentileza, me dar um aumento?</p>
+    <div class="buttons">
+      <button class="btn yes" onclick="mostrarAgradecimento()">CLARO, MEU MELHOR FUNCIONÁRIO.</button>
+      <button class="btn no" id="noBtn" onmouseover="moverBotao()">não</button>
+    </div>
+  </div>
+
+  <div class="container oculto" id="tela2">
+    <h1>OBRIGADO, CHEFE! 🥳</h1>
+    <p>Atributos melhorados:</p>
+    <div class="atributos">
+      <div>💰 Salário: +40%</div>
+      <div>🙏 Gratidão ao Chefe: +100%</div>
+    </div>
+  </div>
+
+  <script>
+    function mostrarAgradecimento() {
+      document.getElementById("tela1").classList.add("oculto");
+      document.getElementById("bg1").classList.add("oculto");
+
+      document.getElementById("tela2").classList.remove("oculto");
+      document.getElementById("bg2").classList.remove("oculto");
+    }
+
+    function moverBotao() {
+      const noBtn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+  </script>
+</body>
+</html>
